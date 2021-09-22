@@ -67,7 +67,7 @@ function generateError(message: string, code: number): never {
 
 
 
-generateError('An error occured', 500);
+generateError('An error occured in the file', 500);
 
 
 
