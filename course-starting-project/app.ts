@@ -43,3 +43,13 @@ addAndHandle(10, 20, (result: number) => {
     console.log("Result in cb is " + result)
     return 0;
 });
+
+
+// let userInput: unknown; wont work
+let userInput: any;
+let userName: string;
+
+userInput = 5;
+userInput = 'Max';
+userName = userInput;
+
