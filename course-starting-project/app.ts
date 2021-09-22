@@ -55,7 +55,20 @@ userInput = 'Max';
 
 if (typeof userInput === 'string') {
     userName = userInput;
+    console.log("It is a string.");
 }
+
+let fnError: never;
+ 
+function generateError(message: string, code: number): never {
+    throw{message: message, errorCode: code};
+    // while(true) {} - never returns;
+}
+
+
+
+generateError('An error occured', 500);
+
 
 
 
