@@ -13,7 +13,33 @@ function add(n1: number, n2: number, showResult: boolean, phrase: string){
 const num1 = 5;
 const num2 = 2.8;
 const printResult = true;
-const printPhrase = "Result is";
+const printPhrase = "Result is ";
 
 const result = add(num1, num2, printResult, printPhrase);
 console.log(printPhrase + result);
+
+function add1(n1: number, n2: number): number {
+    return n1 + n2
+}
+
+function logResult(num: number){
+    console.log("Result is " + num);
+}
+
+//let combineValues1: Function;
+let combineValues1: (a: number, b: number) => number;
+combineValues1 = add1;
+console.log(combineValues1(8,8));
+// combineValues1 = logResult;
+// console.log(combineValues1(8));
+
+function addAndHandle(a: number, b: number, cb: (num: number) => number){
+    const result = a + b;
+    cb(result);
+}
+
+
+addAndHandle(10, 20, (result: number) => {
+    console.log("Result in cb is " + result)
+    return 0;
+});

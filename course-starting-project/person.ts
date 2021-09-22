@@ -1,5 +1,7 @@
 enum Role {DAD, MON, KID};
 
+type Combinable = number|string;
+
 const person:  {
     name: string;
     age: number;
@@ -14,7 +16,7 @@ const person:  {
     hobbies: ['Cricket', 'Football', 'Volleyball'],
     marks: [56, "Physics"],
     role: Role.DAD,
-    resultConversion: 'as-number';
+    resultConversion: 'as-number'
 }
 
 let favActs: string[];
@@ -29,7 +31,7 @@ for(const hobby of person.hobbies){
     console.log(hobby.toUpperCase());
 }
 
-function combine(input1: number|string, input2: string|number){
+function combine(input1: Combinable, input2: Combinable){
     if(typeof input1 === 'number' && typeof input2 === 'number' ){
         return input1 + input2;
     }else{
