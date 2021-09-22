@@ -1,14 +1,17 @@
-// const person:  {
-//     name: string;
-//     age: number;
-//     hobbies: string[];
-//     tuples: [number, string];
-// } = {
-var person =  {
+enum Role {DAD, MON, KID};
+const person:  {
+    name: string;
+    age: number;
+    hobbies: string[];
+    marks: [number, string];
+    role: Role
+} = {
+// var person =  {
     name: "Sanjeev",
     age: 43,
     hobbies: ['Cricket', 'Football', 'Volleyball'],
-    marks: [56, "Physics"]
+    marks: [56, "Physics"],
+    role: Role.DAD
 }
 
 let favActs: string[];
