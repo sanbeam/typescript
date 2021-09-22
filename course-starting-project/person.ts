@@ -1,17 +1,20 @@
 enum Role {DAD, MON, KID};
+
 const person:  {
     name: string;
     age: number;
     hobbies: string[];
     marks: [number, string];
-    role: Role
+    role: Role,
+    resultConversion: 'as-number' | 'as-text'
 } = {
 // var person =  {
     name: "Sanjeev",
     age: 43,
     hobbies: ['Cricket', 'Football', 'Volleyball'],
     marks: [56, "Physics"],
-    role: Role.DAD
+    role: Role.DAD,
+    resultConversion: 'as-number';
 }
 
 let favActs: string[];
