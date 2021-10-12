@@ -1,2 +1,5 @@
 node_modules
 *.js
+.vscode/
+dist/
+oldprojects/adjusted-project/using-ts.js.map
