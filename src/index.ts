@@ -334,3 +334,29 @@ type IPerson2 = {
   age: number;
   optional?: string;
 };
+
+interface Point4D {
+  x: number;
+  y: number;
+  z: number;
+  w: number;
+}
+
+interface Point5D extends Point4D {
+  r: number;
+}
+export const point11: Point5D = {
+  x: 0,
+  y: 0,
+  z: 0,
+  w: 0,
+  r: 0,
+};
+
+console.log(point11);
+
+//never
+
+const funcNever = (message: string) => {
+  throw new Error(message);
+};
