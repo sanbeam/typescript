@@ -360,3 +360,310 @@ console.log(point11);
 const funcNever = (message: string) => {
   throw new Error(message);
 };
+
+function area51(shape: Shape) {
+  if (shape.kind === "square") {
+    return;
+  } else if (shape.kind === "rectangle") {
+    return;
+  }
+  const ensureAllCasesHandled: never = shape;
+}
+
+//definitive assignment
+
+let dice!: number;
+
+function rollDice() {
+  dice = Math.floor(Math.random() * 6) + 1;
+}
+
+rollDice();
+console.log(dice);
+
+class Assertion {
+  x!: number;
+  y!: number;
+
+  constructor() {
+    this.init();
+    console.log(this.x + " " + this.y);
+  }
+
+  init() {
+    this.x = Math.random();
+    this.y = Math.random();
+  }
+}
+
+let ass = new Assertion();
+
+//User defined type guards
+type Square1 = {
+  side: number;
+};
+type Rectangle1 = {
+  l: number;
+  b: number;
+};
+
+type Shape1 = Square1 | Rectangle1;
+
+function isSquare(shape: Shape1): shape is Square1 {
+  return "side" in shape;
+}
+
+function isRectangle(shape: Shape1): shape is Rectangle1 {
+  return "l" in shape;
+}
+
+function area1(shape: Shape1) {
+  if (isSquare(shape)) {
+    console.log(shape.side * shape.side);
+    return shape.side * shape.side;
+  }
+  if (isRectangle(shape)) {
+    console.log(shape.l * shape.b);
+    return shape.l * shape.b;
+  }
+  const _ensure: never = shape;
+  return _ensure;
+}
+
+area1({ side: 10 });
+area1({ l: 10, b: 20 });
+
+//assert
+
+type Person11 = {
+  name: string;
+  dob?: String;
+};
+
+function loadPerson(): Person11 | null {
+  return { name: "Sanjeev", dob: "13Jan" };
+}
+
+function assert(condition: unknown, message: string): asserts condition {
+  if (!condition) throw new Error(message);
+}
+
+const maybePerson = loadPerson();
+
+assert(maybePerson != null, "Could not load person");
+console.log(maybePerson.name);
+
+function reverse(str: string): string;
+function reverse(str: string[]): string[];
+function reverse(param: string | string[]) {
+  if (typeof param == "string") {
+    return param.split("").reverse().join("");
+  } else {
+    return param.slice().reverse();
+  }
+}
+
+let hello1 = ["hello", "world"];
+console.log(reverse(hello1));
+let hello2 = "hello";
+console.log(reverse(hello2));
+
+type Add12 = (a: number, b: number) => number;
+type Add1 = {
+  (a: number, b: number): number;
+  (a: number, b: number, c: number): number;
+  debugStr?: string;
+};
+
+let add2: Add1 = (a: number, b: number, c?: number) => {
+  console.log(a + b + (c == null ? 0 : c));
+  return a + b + (c == null ? 0 : c);
+};
+
+add2(1, 3);
+add2(1, 3, 5);
+
+type PointCreator = new (x: number, y: number) => { x: number; y: number };
+
+type PointCreator2 = {
+  new (x: number, y: number): { x: number; y: number };
+};
+
+const pt4: PointCreator = class {
+  constructor(public x: number, public y: number) {}
+};
+
+abstract class Command {
+  abstract commandLine(): string;
+
+  execute() {
+    console.log("Executing " + this.commandLine());
+  }
+}
+
+class GitFetchCommand extends Command {
+  commandLine() {
+    return "git fetch --all";
+  }
+}
+
+let fetch: Command = new GitFetchCommand();
+fetch.execute();
+
+const strs = {
+  hello: "world",
+};
+console.log(strs["hello"]);
+
+const nums = {
+  1337: "world1",
+};
+console.log(nums[1337]);
+
+type Dictionary = {
+  [key: string]: boolean | undefined;
+};
+let dict: Dictionary = {
+  a: false,
+  b: false,
+  c: true,
+};
+
+console.log(dict);
+
+delete dict["a"];
+
+console.log(dict);
+
+console.log(dict["b"]);
+
+type Person8 = {
+  name: string;
+  email?: string;
+};
+type PersonDictionary = {
+  [name: string]: Person8 | undefined;
+};
+
+const persons: PersonDictionary = {
+  sanjeev: { name: "Sanjeev BA" },
+  suchi: { name: "Suchitra Sanjeev", email: "sanjeevsuchianna@gmail.com" },
+  anna: { name: "Annapoorni Sanjeev" },
+  vaishu: { name: "Vaishnavi Sanjeev", email: "vaishnavisanjeev05@gmail.com" },
+  pinky: { name: "Pinky Sanjeev" },
+};
+
+console.log(persons["pinky"]);
+
+const result = persons["pinky"];
+console.log(result?.email);
+
+function reversed(nums: number[]): number[] {
+  return nums
+    .slice()
+    .sort(function (a, b) {
+      return a - b;
+    })
+    .reverse();
+}
+
+const start = [1, 3, 45, 9, 8, 92];
+const result1 = reversed(start);
+console.log(result1);
+console.log(start);
+
+//tuple readonel
+
+type Point9 = [x: number, y: number];
+
+let point9: Point9 = [0, 0];
+function move18(point: Point9, x: number, y: number): Point9 {
+  console.log(point);
+  return [point[0] + x, point[1] + y];
+}
+console.log(move18(point9, 9, 18));
+console.log(point9);
+
+type Point22D = { x: number; y: number };
+type Point32D = { x: number; y: number; z: number };
+type Person32 = { name: string; email: string };
+
+let pt2: Point22D = { x: 0, y: 0 };
+let pt3: Point32D = { x: 0, y: 0, z: 9 };
+let p3: Person32 = { name: "Sanjeev", email: "some@example.com" };
+
+pt2 = pt3;
+//pt3 = pt2;
+pt3 = pt2 as Point32D;
+
+//pt3 = p3;
+pt3 = p3 as unknown as Point32D;
+
+const king = "elvis";
+//king = "john";
+
+const upperCase = king.toUpperCase();
+
+console.log(upperCase);
+
+//const assertion
+
+const dave = {
+  name: "Dave",
+  skill: "drums",
+  skillset: ["hello", "world"],
+} as const;
+
+//this usage
+
+function double(this: { value: number }) {
+  this.value = this.value * 2;
+}
+
+const valid = {
+  value: 10,
+  double,
+};
+
+console.log(valid.double());
+
+type NameFields = { firstName: string; lastName: string; email: string };
+
+function addFullName<T extends NameFields>(obj: T): T & { fullName: string } {
+  return {
+    ...obj,
+    fullName: `${obj.firstName} ${obj.lastName}`,
+  };
+}
+
+const sanjeev = addFullName({
+  firstName: "Sanjeev",
+  lastName: "BA",
+  email: "some@example.com",
+  age: 40,
+});
+
+console.log(sanjeev.email);
+console.log(sanjeev.fullName);
+
+type Person9 = {
+  name: string;
+  age: number;
+  salary: number;
+};
+
+let john: Person9 = {
+  name: "John Dow",
+  age: 20,
+  salary: 20000,
+};
+//type PersonKeys = keyof Person9;
+
+function logGet<Obj, Key extends keyof Obj>(obj: Obj, key: Key) {
+  console.log(obj[key]);
+}
+
+logGet(john, "name");
+//logGet(john, "mami");
+
+type IsNumber<T> = T extends number ? "number" : "other";
